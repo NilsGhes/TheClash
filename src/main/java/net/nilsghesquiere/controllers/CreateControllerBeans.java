@@ -1,5 +1,7 @@
 package net.nilsghesquiere.controllers;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.support.ErrorPageFilter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,6 +24,22 @@ public class CreateControllerBeans extends WebMvcConfigurerAdapter{
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
+	
+	//start test
+	@Bean
+	public ErrorPageFilter errorPageFilter() {
+	    return new ErrorPageFilter();
+	}
+
+	@Bean
+	public FilterRegistrationBean disableSpringBootErrorFilter(ErrorPageFilter filter) {
+	    FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+	    filterRegistrationBean.setFilter(filter);
+	    filterRegistrationBean.setEnabled(false);
+	    return filterRegistrationBean;
+	}
+	
+	//end test
 /*
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
