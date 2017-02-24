@@ -40,14 +40,15 @@ public class CreateControllerBeans extends WebMvcConfigurerAdapter{
 	}
 	
 	//end test
-/*
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/bootstrap/**").addResourceLocations("/bootstrap/");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 		registry.addResourceHandler("/images/**").addResourceLocations("/images/");
 		registry.addResourceHandler("/styles/**").addResourceLocations("/styles/");
 	}
 
+	/*
 	@Bean
 	MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();

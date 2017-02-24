@@ -1,8 +1,10 @@
 package net.nilsghesquiere.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.logging.Logger;
 
@@ -13,8 +15,9 @@ public class IndexController {
 	private static final String VIEW = "index";
 
 	@RequestMapping(method = RequestMethod.GET)
-	String index() {
+	String index(@RequestParam(value="username", required=false, defaultValue="World") String username, Model model) {
 		logger.info("Loading index.");
+		model.addAttribute("username",username);
 		return VIEW;
 	}
 }

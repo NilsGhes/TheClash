@@ -7,7 +7,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
-
+	private static final int TWO_SECONDS = 2000;
 	/*
 	public Application() {
 	    super();
