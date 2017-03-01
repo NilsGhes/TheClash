@@ -36,6 +36,8 @@ dependencies {
     // end::actuator[]
     // thymeleaf instead of jsp
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    //spring dev tools
+     compile("org.springframework.boot:spring-boot-devtools")
     //bootstrap 
     compile("org.webjars:bootstrap:3.3.2")
     //angularJS

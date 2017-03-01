@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.logging.Logger;
 
 @Controller
-@RequestMapping("/")
-public class IndexController {
-	private static final Logger logger = Logger.getLogger(IndexController.class.getSimpleName());
-	private static final String VIEW = "index";
+@RequestMapping("/account")
+public class AccountController {
+	private static final Logger logger = Logger.getLogger(AccountController.class.getSimpleName());
+	private static final String VIEW = "account";
 
 	@RequestMapping(method = RequestMethod.GET)
-	String index() {
-		logger.info("Loading index.");
+	String Account() {
+		logger.info("Loading account page.");
 		return VIEW;
 	}
 }

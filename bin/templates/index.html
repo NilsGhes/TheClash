@@ -1,22 +1,32 @@
-<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>The Clash</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<!-- Bootstrap -->
-	<link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
-</head>
-	<body>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="box col-md-6 col-md-offset-3">
-					<div class="stormpath-header">
-						<img src="http://stormpath.com/images/template/logo-nav.png"/>
-					</div>
-					<h1 th:inline="text">Hello, [[${account.fullName}]]!</h1>
-					<a th:href="@{/logout}" class="btn btn-danger">Logout</a>
-				</div>
-			</div>
-		</div>
-	</body>
+    <head>
+    	<title>The Clash</title>
+	<link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="box col-md-6 col-md-offset-3">
+                    <div class="stormpath-header">
+                        <img src="https://stormpath.com/images/template/logo-nav.png"/>
+                    </div>
+
+                    <!--/* displayed if account IS NOT null, indicating that the user IS logged in */-->
+                    <div th:if="${account}">
+                        <h1 th:inline="text">Hello, [[${account.fullName}]]!</h1>
+                        <form method="post" th:action="@{/logout}">
+                            <a href="/account" class="btn btn-primary">Restricted</a>
+                            <input type="submit" class="btn btn-danger" value="Logout"/>
+                        </form>
+                    </div>
+
+                    <!--/* displayed if account IS null, indicating that the user IS NOT logged in */-->
+                    <div th:unless="${account}">
+                        <h1>Login</h1>
+                        <a href="/account" class="btn btn-primary">Restricted</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
