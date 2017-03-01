@@ -6,14 +6,17 @@
 	<!-- Bootstrap -->
 	<link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
 </head>
-<body>
-	<p th:text="${username}">default test</p>
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<div class="btn-group">
-		<button type="button" class="btn btn-success">This is a success button</button>
-		<button type="button" class="btn btn-warning">This is a warning button</button>
-		<button type="button" class="btn btn-danger">This is a danger button</button>
-	</div>
-</body>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="box col-md-6 col-md-offset-3">
+					<div class="stormpath-header">
+						<img src="http://stormpath.com/images/template/logo-nav.png"/>
+					</div>
+					<h1 th:inline="text">Hello, [[${account.fullName}]]!</h1>
+					<a th:href="@{/logout}" class="btn btn-danger">Logout</a>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
