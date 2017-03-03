@@ -25,26 +25,24 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    // thymeleaf instead of jsp
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     // tag::jetty[]
-    compile("org.springframework.boot:spring-boot-starter-web") {
-        exclude module: "spring-boot-starter-tomcat"
-    }
     compile("org.springframework.boot:spring-boot-starter-jetty")
     // end::jetty[]
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
-    // thymeleaf instead of jsp
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    //spring security
+    compile("org.springframework.boot:spring-boot-starter-security")
     //spring dev tools
-     compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-devtools")
     //bootstrap 
     compile("org.webjars:bootstrap:3.3.2")
     //angularJS
     compile("org.webjars:angularjs:1.6.1")
     //test
     testCompile("junit:junit")
-    //stormpath
-    compile group: 'com.stormpath.spring', name: 'stormpath-default-spring-boot-starter', version:'1.1.1'
-    //providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    //spring security test
+    testCompile("org.springframework.security:spring-security-test")
 }
