@@ -2,11 +2,10 @@ package net.nilsghesquiere.entities;
 
 public class Account {
 	private String name;
-	Jeugdhuis jeugdhuis;
+	private Jeugdhuis jeugdhuis;
 	boolean isBaas;
 	
 	public Account(String name) {
-		super();
 		this.name = name;
 		this.isBaas = false;
 	}

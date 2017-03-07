@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Qualifier("static")
+@Qualifier("staticAccount")
 class StaticAccountDAO implements AccountDAO{
 	
 	public Account getAccount(){

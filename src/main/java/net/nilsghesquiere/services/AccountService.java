@@ -12,7 +12,7 @@ public class AccountService{
 	private final AccountDAO accountDAO;
 	
 	@Autowired
-	public AccountService(@Qualifier("static") AccountDAO accountDAO){
+	public AccountService(@Qualifier("staticAccount") AccountDAO accountDAO){
 		this.accountDAO = accountDAO;
 	}
 	

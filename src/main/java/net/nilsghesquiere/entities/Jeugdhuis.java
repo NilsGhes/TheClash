@@ -3,9 +3,9 @@ package net.nilsghesquiere.entities;
 public class Jeugdhuis {
 	private String name;
 	private Integer aantalDranken;
+	private Account eigenaar;
 	
 	public Jeugdhuis(String name) {
-		super();
 		this.name = name;
 	}
 
@@ -23,6 +23,14 @@ public class Jeugdhuis {
 
 	public void setAantalDranken(Integer aantalDranken) {
 		this.aantalDranken = aantalDranken;
+	}
+
+	public Account getEigenaar() {
+		return eigenaar;
+	}
+
+	public void setEigenaar(Account eigenaar) {
+		this.eigenaar = eigenaar;
 	}
 	
 }
