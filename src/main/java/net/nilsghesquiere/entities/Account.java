@@ -1,15 +1,14 @@
 package net.nilsghesquiere.entities;
 
 public class Account {
+	long id;
 	private String name;
-	private Jeugdhuis jeugdhuis;
-	boolean isBaas;
 	
-	public Account(String name) {
+	public Account(long id, String name) {
+		this.id=id;
 		this.name = name;
-		this.isBaas = false;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -18,12 +17,4 @@ public class Account {
 		this.name = name;
 	}
 
-	public Jeugdhuis getJeugdhuis() {
-		return jeugdhuis;
-	}
-
-	public void setJeugdhuis(Jeugdhuis jeugdhuis) {
-		this.jeugdhuis = jeugdhuis;
-	}
-	
 }

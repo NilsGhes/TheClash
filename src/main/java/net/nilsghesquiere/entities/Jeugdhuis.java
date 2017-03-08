@@ -1,12 +1,31 @@
 package net.nilsghesquiere.entities;
 
 public class Jeugdhuis {
+	private long id;
 	private String name;
-	private Integer aantalDranken;
+	private int aantalDranken;
 	private Account eigenaar;
 	
-	public Jeugdhuis(String name) {
+	public Jeugdhuis(long id, String name, int aantalDranken, Account eigenaar) {
+		this.id=id;
 		this.name = name;
+		this.aantalDranken = aantalDranken;
+		this.eigenaar = eigenaar;
+	}
+
+	public Jeugdhuis(long id, String name, int aantalDranken) {
+		this.id=id;
+		this.name = name;
+		this.aantalDranken = aantalDranken;
+		this.eigenaar = null;
+	}
+	
+	public Jeugdhuis() {
+
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -21,16 +40,24 @@ public class Jeugdhuis {
 		return aantalDranken;
 	}
 
-	public void setAantalDranken(Integer aantalDranken) {
-		this.aantalDranken = aantalDranken;
-	}
-
 	public Account getEigenaar() {
 		return eigenaar;
 	}
 
 	public void setEigenaar(Account eigenaar) {
 		this.eigenaar = eigenaar;
+	}
+	
+	public void setAantalDranken(Integer aantalDranken) {
+		this.aantalDranken = aantalDranken;
+	}
+
+	public void incrementAantalDranken(){
+		this.aantalDranken++;
+	}
+
+	public void setId(long id) {
+		this.id=id;
 	}
 	
 }

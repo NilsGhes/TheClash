@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 class StaticAccountDAO implements AccountDAO{
 	
 	public Account getAccount(){
-		return new Account("nils");
+		return new Account(1L,"nils");
 	}
 }
