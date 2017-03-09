@@ -1,8 +1,14 @@
 package net.nilsghesquiere.entities;
 
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Jeugdhuis {
 	private long id;
+	@NotBlank
 	private String name;
+	@Min(0)
 	private int aantalDranken;
 	private Account eigenaar;
 	

@@ -1,4 +1,4 @@
-package net.nilsghesquiere.controllers;
+package net.nilsghesquiere.web;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.support.ErrorPageFilter;

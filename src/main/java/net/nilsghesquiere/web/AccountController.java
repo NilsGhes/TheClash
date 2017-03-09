@@ -1,4 +1,4 @@
-package net.nilsghesquiere.controllers;
+package net.nilsghesquiere.web;
 
 import java.util.logging.Logger;
 

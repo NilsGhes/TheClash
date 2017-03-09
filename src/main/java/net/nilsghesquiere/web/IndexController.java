@@ -1,4 +1,4 @@
-package net.nilsghesquiere.controllers;
+package net.nilsghesquiere.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
