@@ -1,22 +1,23 @@
 package net.nilsghesquiere.services;
 
-import net.nilsghesquiere.DAO.AccountDAO;
 import net.nilsghesquiere.entities.Account;
+import net.nilsghesquiere.repositories.AccountRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
+//@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 public class AccountServiceImpl implements AccountService{
-	private final AccountDAO accountDAO;
+	private final AccountRepository accountRepository;
 	
 	@Autowired
-	public AccountServiceImpl(@Qualifier("staticAccount") AccountDAO accountDAO){
-		this.accountDAO = accountDAO;
+	public AccountServiceImpl(@Qualifier("staticAccount") AccountRepository accountRepository){
+		this.accountRepository = accountRepository;
 	}
 	
-	public Account getAccount(){
-		return accountDAO.getAccount();
+	public Account read(long id){
+		return accountRepository.findOne(id);
 	}
 }

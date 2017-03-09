@@ -9,6 +9,6 @@ public interface JeugdhuisService {
 	Jeugdhuis read(long id);
 	void delete(long id);
 	void update(Jeugdhuis jeugdhuis);
-	List<Jeugdhuis> findaAll();
+	List<Jeugdhuis> findAll();
 	long findAantalJeugdhuizen();
 }

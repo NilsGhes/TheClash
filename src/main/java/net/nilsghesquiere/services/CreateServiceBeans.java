@@ -6,16 +6,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 public class CreateServiceBeans{
-/*
+	/*
+	//TODO
 	@Bean
-	AccountDAO accountDAO() {
-	return new StaticAccountDAO();
+	DataSourceTransactionManager transactionManager() {
+	return new DataSourceTransactionManager(dataSource); 
 	}
-	
-	@Bean
-	AccountService accountService() {
-	return new AccountService(accountDAO());
-	}
-*/
+	*/
 }
 

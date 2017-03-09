@@ -28,7 +28,7 @@ public class JeugdhuisController {
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView Jeugdhuis() {
 		logger.info("Loading jeugdhuis page.");
-		List<Jeugdhuis> jeugdhuizen = jeugdhuisService.findaAll();
+		List<Jeugdhuis> jeugdhuizen = jeugdhuisService.findAll();
 		return new ModelAndView(VIEW).addObject("jeugdhuizen", jeugdhuizen);
 	}
 }
