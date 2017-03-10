@@ -6,7 +6,6 @@ import net.nilsghesquiere.entities.Jeugdhuis;
 import net.nilsghesquiere.repositories.JeugdhuisRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +13,7 @@ public class JeugdhuisServiceImpl implements JeugdhuisService{
 	private final JeugdhuisRepository jeugdhuisRepository;
 	
 	@Autowired
-	public JeugdhuisServiceImpl(@Qualifier("staticJeugdhuis") JeugdhuisRepository jeugdhuisRepository){
+	public JeugdhuisServiceImpl(JeugdhuisRepository jeugdhuisRepository){
 		this.jeugdhuisRepository = jeugdhuisRepository;
 	}
 	

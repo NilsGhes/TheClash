@@ -4,7 +4,6 @@ import net.nilsghesquiere.entities.Account;
 import net.nilsghesquiere.repositories.AccountRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +12,7 @@ public class AccountServiceImpl implements AccountService{
 	private final AccountRepository accountRepository;
 	
 	@Autowired
-	public AccountServiceImpl(@Qualifier("staticAccount") AccountRepository accountRepository){
+	public AccountServiceImpl(AccountRepository accountRepository){
 		this.accountRepository = accountRepository;
 	}
 	
