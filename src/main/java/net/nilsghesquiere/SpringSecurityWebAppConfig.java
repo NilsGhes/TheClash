@@ -11,7 +11,8 @@ public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
         .authorizeRequests().antMatchers("/").permitAll().and()
-        .authorizeRequests().antMatchers("/console/**").permitAll();
+        .authorizeRequests().antMatchers("/console/**").permitAll().and()
+        .authorizeRequests().antMatchers("/admin/**").permitAll();
         
        //H2 console
 		http.csrf().disable();
