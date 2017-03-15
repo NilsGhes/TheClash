@@ -16,12 +16,16 @@ public class Account implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
 	private String name;
+
 	
-	public Account(long id, String name) {
-		this.id=id;
+	public Account(String name) {
 		this.name = name;
 	}
 	
+	public Account() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -30,6 +34,16 @@ public class Account implements Serializable{
 		this.name = name;
 	}
 	
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

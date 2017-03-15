@@ -26,7 +26,6 @@ public class AccountController {
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView Account() {
 		logger.info("Loading account page.");
-		return new ModelAndView(VIEW);
-		//.addObject("account", accountService.read(1L));
+		return new ModelAndView(VIEW).addObject("accounts", accountService.findAll());
 	}
 }

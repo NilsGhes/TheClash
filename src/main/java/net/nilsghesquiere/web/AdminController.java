@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
+import net.nilsghesquiere.entities.Account;
 import net.nilsghesquiere.entities.Jeugdhuis;
 import net.nilsghesquiere.services.AccountService;
 import net.nilsghesquiere.services.JeugdhuisService;
@@ -40,18 +41,49 @@ public class AdminController {
 		return VIEW;
 	}
 	
+	@RequestMapping(path="test", method = RequestMethod.GET)
+	String AdminTest() {
+    	Account acc1 = new Account("Nils");
+    	Account acc2 = new Account("Lukas");
+    	Jeugdhuis jgh1 = new Jeugdhuis("Traveir",313,acc1);
+    	Jeugdhuis jgh2 = new Jeugdhuis("Traveir",17,acc2);
+    	accountService.create(acc1);
+    	accountService.create(acc2);
+    	jeugdhuisService.create(jgh1);
+    	jeugdhuisService.create(jgh2);
+		logger.info("filled database with test.");
+		return VIEW;
+	}
+	
 	@RequestMapping(path="jeugdhuizen", method = RequestMethod.GET)
 	ModelAndView JeugdhuizenAdmin() {
 		logger.info("Loading jeugdhuis admin page.");
-		return new ModelAndView(JEUGDHUIS_ADMIN_VIEW).addObject(new JeugdhuisForm());
+		return new ModelAndView(JEUGDHUIS_ADMIN_VIEW).addObject(new Jeugdhuis()).addObject("accounts",accountService.findAll());
 	}
 	
 	@RequestMapping(path="jeugdhuizen", method = RequestMethod.POST)
 	ModelAndView CreateJeugdhuis(@Valid Jeugdhuis jeugdhuis, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView(JEUGDHUIS_ADMIN_VIEW);
+			return new ModelAndView(JEUGDHUIS_ADMIN_VIEW).addObject(new Jeugdhuis()).addObject("accounts",accountService.findAll()).addObject("errors",bindingResult.getAllErrors());
 		}
+		logger.info("Creating new jeugdhuis.");
 		jeugdhuisService.create(jeugdhuis);
+		return new ModelAndView(REDIRECT_NA_TOEVOEGEN);
+	}
+	
+	@RequestMapping(path="accounts", method = RequestMethod.GET)
+	ModelAndView AccountsAdmin() {
+		logger.info("Loading accounts admin page.");
+		return new ModelAndView(ACCOUNT_ADMIN_VIEW).addObject(new Account());
+	}
+	
+	@RequestMapping(path="accounts", method = RequestMethod.POST)
+	ModelAndView CreateAccount(@Valid Account account, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView(ACCOUNT_ADMIN_VIEW).addObject(new Account()).addObject("errors",bindingResult.getAllErrors());
+		}
+		logger.info("Creating new jeugdhuis.");
+		accountService.create(account);
 		return new ModelAndView(REDIRECT_NA_TOEVOEGEN);
 	}
 }

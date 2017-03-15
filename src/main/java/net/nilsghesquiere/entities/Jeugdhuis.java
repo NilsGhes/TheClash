@@ -44,6 +44,18 @@ public class Jeugdhuis implements Serializable{
 		this.eigenaar = null;
 	}
 	
+	public Jeugdhuis(String name, int aantalDranken, Account eigenaar) {
+		this.name = name;
+		this.aantalDranken = aantalDranken;
+		this.eigenaar = eigenaar;
+	}
+
+	public Jeugdhuis(String name, int aantalDranken) {
+		this.name = name;
+		this.aantalDranken = aantalDranken;
+		this.eigenaar = null;
+	}
+	
 	public Jeugdhuis() {
 
 	}

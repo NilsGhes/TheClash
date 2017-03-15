@@ -1,5 +1,7 @@
 package net.nilsghesquiere.services;
 
+import java.util.List;
+
 import net.nilsghesquiere.entities.Account;
 import net.nilsghesquiere.repositories.AccountRepository;
 
@@ -18,5 +20,15 @@ public class AccountServiceImpl implements AccountService{
 	
 	public Account read(long id){
 		return accountRepository.findOne(id);
+	}
+
+	@Override
+	public List<Account> findAll() {
+		return (List<Account>) accountRepository.findAll();
+	}
+
+	@Override
+	public void create(Account account) {
+		accountRepository.save(account);
 	}
 }
