@@ -46,7 +46,7 @@ public class AdminController {
     	Account acc1 = new Account("Nils");
     	Account acc2 = new Account("Lukas");
     	Jeugdhuis jgh1 = new Jeugdhuis("Traveir",313,acc1);
-    	Jeugdhuis jgh2 = new Jeugdhuis("Traveir",17,acc2);
+    	Jeugdhuis jgh2 = new Jeugdhuis("Chaplin",17,acc2);
     	accountService.create(acc1);
     	accountService.create(acc2);
     	jeugdhuisService.create(jgh1);

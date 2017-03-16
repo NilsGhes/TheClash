@@ -88,8 +88,8 @@ public class Jeugdhuis implements Serializable{
 		this.aantalDranken = aantalDranken;
 	}
 
-	public void incrementAantalDranken(){
-		this.aantalDranken++;
+	public void incrementAantalDranken(Integer aantal){
+		this.aantalDranken += aantal;
 	}
 
 	public void setId(long id) {

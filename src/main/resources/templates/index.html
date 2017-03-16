@@ -6,14 +6,26 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="box col-md-6 col-md-offset-3">
+                 <div class="box col-xs-3 col-xs-offset-8">
                     <form method="post" th:action="@{/logout}">
                         <a href="/jeugdhuis" class="btn btn-primary">Jeugdhuis</a>
                         <a href="/account" class="btn btn-primary">Account</a>
                         <a href="/admin" class="btn btn-warning">Admin</a>
                         <input th:if="${account}" type="submit" class="btn btn-danger" value="Logout"/>
                     </form>
-                </div>
+                 </div>
+            </div>
+            <div class="row">
+            	<div th:each="jh : ${jeugdhuizen}" class="col-xs-6 text-center">
+            		<h2 th:inline="text">[[${jh.name}]].</h2>
+            		<p th:inline="text">Eigenaar: [[${jh.eigenaar.name}]].</p>
+        	    	<p th:inline="text">Aantal: [[${jh.aantalDranken}]].</p>
+        	    	<form sec:authorize="hasRole('jhadmin')" id="drankenForm" th:action="@{/}" method="post">
+        	    		<input type ="number" name="aantDr" id="aantDr" value="1" />
+         	    		<input type="hidden" name="jhId" id="jhId" th:value="${jh.id}" />
+            			<button type="submit" id="incrementKnop" class="btn btn-default">+</button>
+        	    	</form>
+	            </div>
             </div>
         </div>
     </body>
