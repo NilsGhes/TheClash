@@ -25,7 +25,7 @@
 						<select th:field="*{eigenaar}">
 							<option th:each="account : ${accounts}"
 							th:value="${account.id}"
-							th:text="${account.name}">Test</option>
+							th:text="${account.username}">Test</option>
 						</select>
 						<button type="submit" id="submitknop" class="btn btn-default">Add</button>
 					</form>

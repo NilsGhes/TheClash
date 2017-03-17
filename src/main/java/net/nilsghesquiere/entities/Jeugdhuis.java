@@ -28,9 +28,9 @@ public class Jeugdhuis implements Serializable{
 	private int aantalDranken;
 	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="id")
-	private Account eigenaar;
+	private User eigenaar;
 	
-	public Jeugdhuis(long id, String name, int aantalDranken, Account eigenaar) {
+	public Jeugdhuis(long id, String name, int aantalDranken, User eigenaar) {
 		this.id=id;
 		this.name = name;
 		this.aantalDranken = aantalDranken;
@@ -44,7 +44,7 @@ public class Jeugdhuis implements Serializable{
 		this.eigenaar = null;
 	}
 	
-	public Jeugdhuis(String name, int aantalDranken, Account eigenaar) {
+	public Jeugdhuis(String name, int aantalDranken, User eigenaar) {
 		this.name = name;
 		this.aantalDranken = aantalDranken;
 		this.eigenaar = eigenaar;
@@ -76,11 +76,11 @@ public class Jeugdhuis implements Serializable{
 		return aantalDranken;
 	}
 
-	public Account getEigenaar() {
+	public User getEigenaar() {
 		return eigenaar;
 	}
 
-	public void setEigenaar(Account eigenaar) {
+	public void setEigenaar(User eigenaar) {
 		this.eigenaar = eigenaar;
 	}
 	

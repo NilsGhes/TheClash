@@ -27,6 +27,8 @@ targetCompatibility = 1.8
 dependencies {
     // thymeleaf instead of jsp
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    //thymeleaf spring security tags
+    compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
     // tag::jetty[]
     compile("org.springframework.boot:spring-boot-starter-jetty")
     // end::jetty[]

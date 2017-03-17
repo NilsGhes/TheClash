@@ -1,5 +1,7 @@
 package net.nilsghesquiere;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,18 +13,36 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {
-	private static final String USER ="user";
 	private static final String JHADMIN ="jhadmin";
 	private static final String APPADMIN ="appadmin";
+	private static final String USERS_BY_USERNAME =
+			"select username as username, password as password, enabled as enabled" +
+			" from users where username = ?";
+	private static final String AUTHORITIES_BY_USERNAME =
+			"select users.username as username, roles.name as authorities" +
+			" from users inner join userroles" +
+			" on users.id = userroles.userid" +
+			" inner join roles" +
+			" on roles.id = userroles.roleid" +
+			" where users.username= ?";
+	
+	@Autowired
+	private DataSource dataSource;
 	
 	@Override
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth)
 	throws Exception {
-	auth.inMemoryAuthentication() 
+	auth
+	.jdbcAuthentication().dataSource(dataSource)
+	.usersByUsernameQuery(USERS_BY_USERNAME)
+	.authoritiesByUsernameQuery(AUTHORITIES_BY_USERNAME);
+	/*
+	.inMemoryAuthentication() 
 	.withUser("nils").password("test123").authorities(JHADMIN,APPADMIN)
-	.and().withUser("lukas").password("test123").authorities(JHADMIN)
-	.authorities(JHADMIN, APPADMIN);
+	.and()
+	.withUser("lukas").password("test123").authorities(JHADMIN);
+	*/
 	}
 	
 	@Override
@@ -39,13 +59,20 @@ public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
         .loginPage("/login.html")
         .failureUrl("/login-error.html")
+        .defaultSuccessUrl("/", true)
         .and()
         .logout()
-        .logoutSuccessUrl("/index.html")
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/")
+        //.and()
+        //.exceptionHandling().accessDeniedPage("/forbidden.html")
         .and()
-        .authorizeRequests().antMatchers("/admin/**").hasAuthority(APPADMIN)
+        .authorizeRequests()
         .antMatchers(HttpMethod.POST, "/").hasAuthority(JHADMIN)
+        .antMatchers("/admin/**").hasAuthority(APPADMIN)
         .antMatchers("/").permitAll()
+        .antMatchers("/login.html").permitAll()
+        .antMatchers("/forbidden.html").permitAll()
         .antMatchers("/**").authenticated();
 
         

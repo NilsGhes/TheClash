@@ -2,7 +2,7 @@ package net.nilsghesquiere.web;
 
 import java.util.logging.Logger;
 
-import net.nilsghesquiere.services.AccountService;
+import net.nilsghesquiere.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,16 +16,16 @@ public class AccountController {
 	private static final Logger logger = Logger.getLogger(AccountController.class.getSimpleName());
 	private static final String VIEW = "account";
 
-	private final AccountService accountService ;
+	private final UserService userService ;
 
 	@Autowired
-	public AccountController(AccountService accountService) {
-		this.accountService = accountService;
+	public AccountController(UserService userService) {
+		this.userService = userService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView Account() {
 		logger.info("Loading account page.");
-		return new ModelAndView(VIEW).addObject("accounts", accountService.findAll());
+		return new ModelAndView(VIEW).addObject("accounts", userService.findAll());
 	}
 }

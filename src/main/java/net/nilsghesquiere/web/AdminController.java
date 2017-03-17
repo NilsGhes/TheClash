@@ -4,9 +4,9 @@ import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
-import net.nilsghesquiere.entities.Account;
+import net.nilsghesquiere.entities.User;
 import net.nilsghesquiere.entities.Jeugdhuis;
-import net.nilsghesquiere.services.AccountService;
+import net.nilsghesquiere.services.UserService;
 import net.nilsghesquiere.services.JeugdhuisService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +27,12 @@ public class AdminController {
 	private static final String REDIRECT_NA_TOEVOEGEN = "redirect:/";
 	
 	private final JeugdhuisService jeugdhuisService ;
-	private final AccountService accountService ;
+	private final UserService userService ;
 
 	@Autowired
-	public AdminController(JeugdhuisService jeugdhuisService, AccountService accountService) {
+	public AdminController(JeugdhuisService jeugdhuisService, UserService userService) {
 		this.jeugdhuisService = jeugdhuisService;
-		this.accountService = accountService;
+		this.userService = userService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -41,30 +41,16 @@ public class AdminController {
 		return VIEW;
 	}
 	
-	@RequestMapping(path="test", method = RequestMethod.GET)
-	String AdminTest() {
-    	Account acc1 = new Account("Nils");
-    	Account acc2 = new Account("Lukas");
-    	Jeugdhuis jgh1 = new Jeugdhuis("Traveir",313,acc1);
-    	Jeugdhuis jgh2 = new Jeugdhuis("Chaplin",17,acc2);
-    	accountService.create(acc1);
-    	accountService.create(acc2);
-    	jeugdhuisService.create(jgh1);
-    	jeugdhuisService.create(jgh2);
-		logger.info("filled database with test.");
-		return VIEW;
-	}
-	
 	@RequestMapping(path="jeugdhuizen", method = RequestMethod.GET)
 	ModelAndView JeugdhuizenAdmin() {
 		logger.info("Loading jeugdhuis admin page.");
-		return new ModelAndView(JEUGDHUIS_ADMIN_VIEW).addObject(new Jeugdhuis()).addObject("accounts",accountService.findAll());
+		return new ModelAndView(JEUGDHUIS_ADMIN_VIEW).addObject(new Jeugdhuis()).addObject("accounts",userService.findAll());
 	}
 	
 	@RequestMapping(path="jeugdhuizen", method = RequestMethod.POST)
 	ModelAndView CreateJeugdhuis(@Valid Jeugdhuis jeugdhuis, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView(JEUGDHUIS_ADMIN_VIEW).addObject(new Jeugdhuis()).addObject("accounts",accountService.findAll()).addObject("errors",bindingResult.getAllErrors());
+			return new ModelAndView(JEUGDHUIS_ADMIN_VIEW).addObject(new Jeugdhuis()).addObject("accounts",userService.findAll()).addObject("errors",bindingResult.getAllErrors());
 		}
 		logger.info("Creating new jeugdhuis.");
 		jeugdhuisService.create(jeugdhuis);
@@ -74,16 +60,16 @@ public class AdminController {
 	@RequestMapping(path="accounts", method = RequestMethod.GET)
 	ModelAndView AccountsAdmin() {
 		logger.info("Loading accounts admin page.");
-		return new ModelAndView(ACCOUNT_ADMIN_VIEW).addObject(new Account());
+		return new ModelAndView(ACCOUNT_ADMIN_VIEW).addObject(new User());
 	}
 	
 	@RequestMapping(path="accounts", method = RequestMethod.POST)
-	ModelAndView CreateAccount(@Valid Account account, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	ModelAndView CreateUser(@Valid User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView(ACCOUNT_ADMIN_VIEW).addObject(new Account()).addObject("errors",bindingResult.getAllErrors());
+			return new ModelAndView(ACCOUNT_ADMIN_VIEW).addObject(new User()).addObject("errors",bindingResult.getAllErrors());
 		}
 		logger.info("Creating new jeugdhuis.");
-		accountService.create(account);
+		userService.create(user);
 		return new ModelAndView(REDIRECT_NA_TOEVOEGEN);
 	}
 }

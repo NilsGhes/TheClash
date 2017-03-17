@@ -9,7 +9,7 @@
                     <h1>Jeugdhuizen</h1>
                     <div th:each="jeugdhuis : ${jeugdhuizen}">
                     	<h2 th:inline="text">[[${jeugdhuis.name}]].</h2>
-                    	<p th:inline="text">Eigenaar: [[${jeugdhuis.eigenaar.name}]].</p>
+                    	<p th:inline="text">Eigenaar: [[${jeugdhuis.eigenaar.username}]].</p>
                     	<p th:inline="text">Aantal: [[${jeugdhuis.aantalDranken}]].</p>
                     	<br />
                     </div>
