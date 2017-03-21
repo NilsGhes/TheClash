@@ -15,6 +15,11 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @Entity
 @Table(name ="jeugdhuizen")
 public class Jeugdhuis implements Serializable{
@@ -22,10 +27,12 @@ public class Jeugdhuis implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@JsonIgnore
 	@NotBlank
 	private String name;
 	@Min(0)
 	private int aantalDranken;
+	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="id")
 	private User eigenaar;

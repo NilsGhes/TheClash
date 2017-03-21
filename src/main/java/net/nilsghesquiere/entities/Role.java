@@ -20,6 +20,10 @@ public class Role implements Serializable{
 	@NotBlank
 	private String name;
 	
+	public Role() {
+
+	}
+
 	public Role(String name) {
 		this.name = name;
 	}

@@ -3,29 +3,51 @@
 	  xmlns:sec="http://www.thymeleaf.org">
     <head>
         <!--/*/ <th:block th:include="fragments/head :: head"/> /*/-->
+        <script type="text/javascript">
+        
+        $(function(){
+        	setInterval(update, 2000);
+        });
+        
+		function update(){
+			$('[id^="jhAantalDranken"]').each(function() {
+				var id= $(this).attr('idjh')
+	            $.ajax({
+	                url: "http://localhost:8080/api/jh/" + id
+	            }).then(function(data) {
+					//console.log("aantalDranken voor jh " + id + ": " + data.aantalDranken);
+	               $('#jhAantalDranken'+ id).text(data.aantalDranken);
+	            });
+			});
+		}
+			//	.each(getAantalDranken($(this).attr('idjh')));
+		
+        </script>
     </head>
     <body>
         <div class="container-fluid">
             <div class="row">
                  <div class="box col-xs-6 pull-right">
-    					<a sec:authorize="isAuthenticated()" href="/account" class="btn btn-warning">Account</a>
-    					<a sec:authorize="hasAuthority('jhadmin')" href="/jeugdhuis" class="btn btn-warning">Jeugdhuis</a>
                         <a sec:authorize="hasAuthority('appadmin')" href="/admin" class="btn btn-warning">Admin</a>
                         <a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-primary">Logout</a>
-                        <a sec:authorize="isAnonymous()" href="/login" class="btn btn-primary">Login</a>
-                        
                  </div>
             </div>
             <div class="row">
-            	<div th:each="jh : ${jeugdhuizen}" class="col-xs-6 text-center">
-            		<h2 th:inline="text">[[${jh.name}]].</h2>
-            		<p th:inline="text">Eigenaar: [[${jh.eigenaar.username}]].</p>
-        	    	<p th:inline="text">Aantal: [[${jh.aantalDranken}]].</p>
-        	    	<form sec:authorize="hasAuthority('jhadmin')" th:if="${jh.eigenaar.username} == ${currentUser}" id="drankenForm" th:action="@{/}" method="post">
-        	    		<input type ="number" name="aantDr" id="aantDr" value="1" />
-         	    		<input type="hidden" name="jhId" id="jhId" th:value="${jh.id}" />
-            			<button type="submit" id="incrementKnop" class="btn btn-default">+</button>
-            		</form>
+            	<div id="jeugdhuizen">
+            		<div th:each="jh : ${jeugdhuizen}" class="col-xs-6 text-center" th:id="'jeugdhuis' + ${jh.id}" >
+	            		<h2 th:id="'jhNaam' + ${jh.id}" th:inline="text" >[[${jh.name}]].</h2>
+	        	    	<h3 th:id="'jhAantalDranken' + ${jh.id}" th:inline="text" th:attr="idjh=${jh.id}">[[${jh.aantalDranken}]].</h3>
+	        	    	<form sec:authorize="hasAuthority('jhadmin')" th:if="${jh.eigenaar.username} == ${currentUser}" id="drankenForm" th:action="@{/}" method="post">
+	        	    		<input type="hidden" th:name="'jhId'" th:id="'jhId' + ${jh.id}" th:value="${jh.id}" />
+	        	    		<input type ="number" th:name="'aantDr'" th:id="'aantDr' + ${jh.id}" value="1" />         	    		
+	            			<button type="submit" th:id="'incrementKnop' + ${jh.id}" class="btn btn-default">+</button>
+	            		</form>
+	        	    	<form sec:authorize="hasAuthority('appadmin')" th:unless="${jh.eigenaar.username} == ${currentUser}" id="drankenFormAppAdmin" th:action="@{/}" method="post">
+	        	    		<input type="hidden" th:name="'jhId'" th:id="'jhId' + ${jh.id}" th:value="${jh.id}" />
+	        	    		<input type ="number" th:name="'aantDr'" th:id="'aantDr' + ${jh.id}" value="1" />
+	         	    		<button type="submit" th:id="'incrementKnop' + ${jh.id}" class="btn btn-default">+</button>
+	            		</form>
+	            	</div>
 	            </div>
             </div>
         </div>

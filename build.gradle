@@ -51,6 +51,8 @@ dependencies {
     compile("com.h2database:h2")
     //angularJS
     compile("org.webjars:angularjs:1.6.1")
+    //Jackson voor JSON
+    compile("com.fasterxml.jackson.core:jackson-databind")
     //test
     testCompile("junit:junit")
     //spring security test

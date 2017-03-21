@@ -13,6 +13,8 @@ import net.nilsghesquiere.services.RoleService;
 import net.nilsghesquiere.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,6 +78,7 @@ public class IndexController {
 		return new ModelAndView(VIEW).addObject("jeugdhuizen", jeugdhuizen).addObject("currentUser", currentUser);
 	}
 	
+	@PreAuthorize("hasAnyAuthority('appadmin','jhadmin')")
 	@RequestMapping(method = RequestMethod.POST)
 	ModelAndView IncreaseDranken(@RequestParam Long jhId, @RequestParam Integer aantDr) {
 		Jeugdhuis jeugdhuis = jeugdhuisService.read(jhId);

@@ -1,7 +1,6 @@
 package net.nilsghesquiere.entities;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,11 +43,11 @@ public class User implements Serializable{
 	}
 
 	
-	public User(String username, String password, Set<Role> authorities) {
+	public User(String username, String password, Set<Role> roles) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.roles = authorities;
+		this.roles = roles;
 		this.enabled =true;
 	}
 
@@ -90,11 +89,21 @@ public class User implements Serializable{
 		this.enabled = enabled;
 	}
 	
-	
-	public Set<Role> getAuthorities() {
+	/*
+	public Set<Role> getRoles() {
 		return Collections.unmodifiableSet(roles);
 	}
+	 */
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
 
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
 	//todo zetten in role
 	public void addRole(Role role){
 		roles.add(role);
