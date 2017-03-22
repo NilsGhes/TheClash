@@ -30,43 +30,16 @@ public class IndexController {
 	private static final String VIEW = "index";
 	private static final String REDIRECT_NA_INCREMENT = "redirect:/";
 	private final JeugdhuisService jeugdhuisService ;
-	private final UserService userService ;
-	private final RoleService roleService;
-	private static boolean testDataCreated = false;
 	
 
 	@Autowired
-	public IndexController(JeugdhuisService jeugdhuisService, UserService userService, RoleService authorityService) {
+	public IndexController(JeugdhuisService jeugdhuisService) {
 		this.jeugdhuisService = jeugdhuisService;
-		this.userService = userService;
-		this.roleService = authorityService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView Jeugdhuis() {
-		if (!testDataCreated){
-			Role jhadmin = new Role("jhadmin");
-			Role appadmin = new Role("appadmin");
-			roleService.create(jhadmin);
-			roleService.create(appadmin);
-			Set<Role> rolesNils = new HashSet<>();
-			Set<Role> rolesLukas = new HashSet<>();
-			rolesNils.add(jhadmin);
-			rolesNils.add(appadmin);
-			rolesLukas.add(jhadmin);
-	    	User nils = new User("Nils","test123",rolesNils);
-	    	User lukas = new User("Lukas","test123",rolesLukas);
-	    	userService.create(nils);
-	    	userService.create(lukas);
-	    	Jeugdhuis dentraveir = new Jeugdhuis("Traveir",313,nils);
-	    	Jeugdhuis chaplin = new Jeugdhuis("Chaplin",17,lukas);
-	    	jeugdhuisService.create(dentraveir);
-	    	jeugdhuisService.create(chaplin);
-			logger.info("filled database with testdata.");
-			testDataCreated = true;
-		}
-		
-		//Change this to get the user object instead
+			//Change this to get the user object instead
 		String currentUser = "";
 		if (SecurityContextHolder.getContext().getAuthentication() != null &&
 				 SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
