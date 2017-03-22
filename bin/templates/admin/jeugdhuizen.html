@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--/*/ <th:block th:include="fragments/head :: head"/> /*/-->
+    <script>
+		document.getElementById('jeugdhuisform').onsubmit = function() {
+			document.getElementById('submitknop').disabled = true;
+		};
+	</script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+            	 <div th:if="${errors}" class="box col-md-6 col-md-offset-3">
+            	 	<div th:each="error : ${errors}" th:inline="text" class='alert alert-danger'>
+            	 		[[${error}]].
+            	 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    </div>
+            	 </div>
+                <div class="box col-xs-4 col-xs-offset-4">
+                    <form id="jeugdhuisform" action="#" th:action="@{/admin/jeugdhuizen}" th:object="${jeugdhuis}" method="post">
+						<div class="form-group row">
+							<label for="name" class="form-label">Name</label>
+							<input id="name" type="text" th:field="*{name}" class="form-control"/> 
+						</div>
+						<div class="form-group row">
+							<label for="aantalDranken" class="form-label">Aantal dranken</label>
+							<input id="aantalDranken" type="text" th:field="*{aantalDranken}" class="form-control"/>
+						</div>
+						<div class="form-group row">
+							<label for="eigenaar" class="form-label">Eigenaar</label>
+							<select id="eigenaar" th:field="*{eigenaar}" class="form-control">
+								<option th:each="account : ${accounts}"
+								th:value="${account.id}"
+								th:text="${account.username}">Test</option>
+						</select>
+						</div>
+						<button type="submit" id="submitknop" class="form-control btn btn-default">Add jeugdhuis</button>
+					</form>
+                    <a href="/" class="btn btn-primary">Go Home</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
