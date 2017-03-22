@@ -30,15 +30,46 @@ public class IndexController {
 	private static final String VIEW = "index";
 	private static final String REDIRECT_NA_INCREMENT = "redirect:/";
 	private final JeugdhuisService jeugdhuisService ;
+	private final UserService userService ;
+	private final RoleService roleService;
+	private static boolean testDataCreated = false;
 	
 
 	@Autowired
-	public IndexController(JeugdhuisService jeugdhuisService) {
+	public IndexController(JeugdhuisService jeugdhuisService, UserService userService, RoleService authorityService) {
 		this.jeugdhuisService = jeugdhuisService;
+		this.userService = userService;
+		this.roleService = authorityService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView Jeugdhuis() {
+		if (!testDataCreated){
+			Role jhadmin = new Role("jhadmin");
+			Role appadmin = new Role("appadmin");
+			roleService.create(jhadmin);
+			roleService.create(appadmin);
+			Set<Role> rolesNils = new HashSet<>();
+			Set<Role> rolesDenTraveir = new HashSet<>();
+			Set<Role> rolesChaplin = new HashSet<>();
+			rolesNils.add(jhadmin);
+			rolesNils.add(appadmin);
+			rolesDenTraveir.add(jhadmin);
+			rolesChaplin.add(jhadmin);
+			User nils = new User("Nils","Syntra1234",rolesNils);
+	    	User traveir = new User("Traveir","ynHbZs",rolesDenTraveir);
+	    	User chaplin = new User("Chaplin","baUWzF",rolesChaplin);
+	    	userService.create(nils);
+	    	userService.create(traveir);
+	    	userService.create(chaplin);
+	    	Jeugdhuis traveirJH = new Jeugdhuis("Traveir",0,traveir);
+	    	Jeugdhuis chaplinJH = new Jeugdhuis("Chaplin",0,chaplin);
+	    	jeugdhuisService.create(traveirJH);
+	    	jeugdhuisService.create(chaplinJH);
+			logger.info("filled database with testdata.");
+			testDataCreated = true;
+		}
+		
 		//Change this to get the user object instead
 		String currentUser = "";
 		if (SecurityContextHolder.getContext().getAuthentication() != null &&
