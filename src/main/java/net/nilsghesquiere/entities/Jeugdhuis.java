@@ -34,7 +34,7 @@ public class Jeugdhuis implements Serializable{
 	private int aantalDranken;
 	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="id")
+	@JoinColumn(name="eigenaar")
 	private User eigenaar;
 	
 	public Jeugdhuis(long id, String name, int aantalDranken, User eigenaar) {
