@@ -42,18 +42,18 @@ dependencies {
     //spring data
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     //spring dev tools
-    compile("org.springframework.boot:spring-boot-devtools")
+    //compile("org.springframework.boot:spring-boot-devtools")
     //bootstrap 
     compile("org.webjars:bootstrap:3.3.2")
     //postgresql connector
     //compile("org.postgresql:postgresql")
     compile(group: 'org.postgresql', name: 'postgresql', version: '42.0.0')
     //angularJS
-    compile("org.webjars:angularjs:1.6.1")
+    //compile("org.webjars:angularjs:1.6.1")
     //Jackson voor JSON
     compile("com.fasterxml.jackson.core:jackson-databind")
     //test
-    testCompile("junit:junit")
+    //testCompile("junit:junit")
     //spring security test
-    testCompile("org.springframework.security:spring-security-test")
+    //testCompile("org.springframework.security:spring-security-test")
 }
