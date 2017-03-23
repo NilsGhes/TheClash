@@ -62,6 +62,8 @@
             		<div th:each="jh : ${jeugdhuizen}" class="col-xs-6 text-center" th:id="'jeugdhuis' + ${jh.id}" >
 	            		<h1 th:id="'jhNaam' + ${jh.id}" th:inline="text" >[[${jh.name}]]</h1>
 	        	    	<h2 th:id="'jhAantalDranken' + ${jh.id}" th:inline="text" th:attr="idjh=${jh.id}">[[${jh.aantalDranken}]]</h2>
+	        	    	<p th:inline="text" >[[${jh.eigenaar.username}]]</p>
+	        	    	<p th:inline="text" >[[${currentUser}]]</p>
 	        	    	<form sec:authorize="hasAuthority('jhadmin')" th:if="${jh.eigenaar.username} == ${currentUser}" id="drankenForm" th:action="@{/}" method="post">
 	        	    		<input type="hidden" th:name="'jhId'" th:id="'jhId' + ${jh.id}" th:value="${jh.id}" />
 	        	    		<div class="form-group">

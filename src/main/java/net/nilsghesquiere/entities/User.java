@@ -37,8 +37,8 @@ public class User implements Serializable{
 	private Set<Role> roles;
 	@OneToOne( 
 			fetch = FetchType.LAZY, 
-			mappedBy = "jeugdhuis") 
-	private Jeugdhuis jeughduis;
+			mappedBy = "eigenaar") 
+	private Jeugdhuis jeugdhuis;
 	
 		public User(String username, String password) {
 		super();
@@ -123,12 +123,12 @@ public class User implements Serializable{
 	
 	
 	public Jeugdhuis getJeughduis() {
-		return jeughduis;
+		return jeugdhuis;
 	}
 
 
 	public void setJeughduis(Jeugdhuis jeughduis) {
-		this.jeughduis = jeughduis;
+		this.jeugdhuis = jeughduis;
 	}
 
 
