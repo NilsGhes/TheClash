@@ -9,14 +9,21 @@
     </head>
     <body>
         <div class="container-fluid">
+        	<div class="row">
+            	<div class="box col-xs-12">
+            		<a href="/" class="btn btn-primary">Go Home</a>
+            	</div>
+            </div>
             <div class="row">
-            	 <div th:if="${errors}" class="box col-md-6 col-md-offset-3">
+            	 <div th:if="${errors}" class="box col-xs-6 col-xs-offset-3">
             	 	<div th:each="error : ${errors}" th:inline="text" class='alert alert-danger'>
             	 		[[${error}]].
             	 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     </div>
             	 </div>
-                <div class="box col-xs-4 col-xs-offset-4">
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-3">
                     <form id="accountform" action="#" th:action="@{/admin/accounts}" th:object="${user}" method="post">
 						<div class="form-group row">
 							<label for="username" class="form-label">Username</label>
@@ -38,7 +45,6 @@
 							<button type="submit" id="submitknop" class="form-control btn btn-default ">Add account</button>
 						</div>
 					</form>
-                    <a href="/" class="btn btn-primary">Go Home</a>
                 </div>
             </div>
         </div>
