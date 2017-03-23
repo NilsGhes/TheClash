@@ -5,12 +5,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -33,8 +35,12 @@ public class User implements Serializable{
 			joinColumns=@JoinColumn(name="userid", referencedColumnName="id"),
 			inverseJoinColumns=@JoinColumn(name="roleid", referencedColumnName="id"))
 	private Set<Role> roles;
+	@OneToOne( 
+			fetch = FetchType.LAZY, 
+			mappedBy = "jeugdhuis") 
+	private Jeugdhuis jeughduis;
 	
-	public User(String username, String password) {
+		public User(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -114,6 +120,18 @@ public class User implements Serializable{
 		roles.remove(role);
 	}
 	
+	
+	
+	public Jeugdhuis getJeughduis() {
+		return jeughduis;
+	}
+
+
+	public void setJeughduis(Jeugdhuis jeughduis) {
+		this.jeughduis = jeughduis;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

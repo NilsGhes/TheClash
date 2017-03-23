@@ -33,7 +33,7 @@ public class Jeugdhuis implements Serializable{
 	@Min(0)
 	private int aantalDranken;
 	@JsonIgnore
-	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="id")
 	private User eigenaar;
 	
