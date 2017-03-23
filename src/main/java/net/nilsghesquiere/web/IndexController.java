@@ -46,7 +46,7 @@ public class IndexController {
 		} 
 
 		logger.info("Loading index page.");
-		List<Jeugdhuis> jeugdhuizen = jeugdhuisService.findAll();
+		List<Jeugdhuis> jeugdhuizen = jeugdhuisService.findAllByOrderByIdAsc();
 		return new ModelAndView(VIEW).addObject("jeugdhuizen", jeugdhuizen).addObject("currentUser", currentUser);
 	}
 	

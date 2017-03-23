@@ -46,5 +46,10 @@ public class JeugdhuisServiceImpl implements JeugdhuisService{
 	public long findAantalJeugdhuizen() {
 		return jeugdhuisRepository.count();
 	}
+
+	@Override
+	public List<Jeugdhuis> findAllByOrderByIdAsc() {
+		return jeugdhuisRepository.findAllByOrderByIdAsc();
+	}
 	
 }

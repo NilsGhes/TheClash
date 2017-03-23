@@ -13,7 +13,7 @@
 			$('[id^="jhAantalDranken"]').each(function() {
 				var id= $(this).attr('idjh')
 	            $.ajax({
-	                url: "http://localhost:8080/api/jh/" + id
+	                url: "http://clashderjeugdhuizen.herokuapp.com/api/jh/" + id
 	            }).then(function(data) {
 					//console.log("aantalDranken voor jh " + id + ": " + data.aantalDranken);
 	               $('#jhAantalDranken'+ id).text(data.aantalDranken);
@@ -35,8 +35,8 @@
             <div class="row">
             	<div id="jeugdhuizen">
             		<div th:each="jh : ${jeugdhuizen}" class="col-xs-6 text-center" th:id="'jeugdhuis' + ${jh.id}" >
-	            		<h2 th:id="'jhNaam' + ${jh.id}" th:inline="text" >[[${jh.name}]].</h2>
-	        	    	<h3 th:id="'jhAantalDranken' + ${jh.id}" th:inline="text" th:attr="idjh=${jh.id}">[[${jh.aantalDranken}]].</h3>
+	            		<h2 th:id="'jhNaam' + ${jh.id}" th:inline="text" >[[${jh.name}]]</h2>
+	        	    	<h3 th:id="'jhAantalDranken' + ${jh.id}" th:inline="text" th:attr="idjh=${jh.id}">[[${jh.aantalDranken}]]</h3>
 	        	    	<form sec:authorize="hasAuthority('jhadmin')" th:if="${jh.eigenaar.username} == ${currentUser}" id="drankenForm" th:action="@{/}" method="post">
 	        	    		<input type="hidden" th:name="'jhId'" th:id="'jhId' + ${jh.id}" th:value="${jh.id}" />
 	        	    		<input type ="number" th:name="'aantDr'" th:id="'aantDr' + ${jh.id}" value="1" />         	    		

@@ -11,4 +11,5 @@ public interface JeugdhuisService {
 	void update(Jeugdhuis jeugdhuis);
 	List<Jeugdhuis> findAll();
 	long findAantalJeugdhuizen();
+	public List<Jeugdhuis> findAllByOrderByIdAsc();
 }
