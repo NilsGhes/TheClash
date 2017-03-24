@@ -5,7 +5,9 @@
         <!--/*/ <th:block th:include="fragments/head :: head"/> /*/-->
         <script type="text/javascript">
         $(function(){
+        	getTime();
         	setInterval(update, 1000);
+        	setInterval(getTime,1000);
         });
         
 		function update(){
@@ -15,26 +17,29 @@
 	                url: "http://clashderjeugdhuizen.herokuapp.com/api/jh/" + id
 	            }).then(function(data) {
 	               $('#jhAantalDranken'+ id).text(data.aantalDranken);
-	               var currentdate = new Date(); 
-	               var currentHours = currentdate.getHours();
-	               var currentMinutes = currentdate.getMinutes(); 
-	               var currentSeconds = currentdate.getSeconds();
-	               var timerText = "";
-	               if (currentHours.toString().length == 1){
-	            	   timerText += "0";
-	               }
-	               timerText += currentHours + ":";
-	               if (currentMinutes.toString().length == 1){
-	            	   timerText += "0";
-	               }
-            	   timerText += currentMinutes + ":";
-	               if (currentSeconds.toString().length == 1){
-	            	   timerText += "0";
-	               }
-            	   timerText += currentSeconds;
-	               $('#timer').text(timerText);
 	            });
 			});
+		}
+		
+		function getTime(){
+            var currentdate = new Date(); 
+            var currentHours = currentdate.getHours();
+            var currentMinutes = currentdate.getMinutes(); 
+            var currentSeconds = currentdate.getSeconds();
+            var timerText = "";
+            if (currentHours.toString().length == 1){
+         	   timerText += "0";
+            }
+            timerText += currentHours + ":";
+            if (currentMinutes.toString().length == 1){
+         	   timerText += "0";
+            }
+     	   timerText += currentMinutes + ":";
+            if (currentSeconds.toString().length == 1){
+         	   timerText += "0";
+            }
+     	   timerText += currentSeconds;
+            $('#timer').text(timerText);
 		}
 
         </script>
