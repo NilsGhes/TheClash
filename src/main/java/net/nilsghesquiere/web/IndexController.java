@@ -1,19 +1,15 @@
 package net.nilsghesquiere.web;
 
-import java.util.HashSet;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import net.nilsghesquiere.entities.Jeugdhuis;
-import net.nilsghesquiere.entities.Role;
-import net.nilsghesquiere.entities.User;
 import net.nilsghesquiere.services.JeugdhuisService;
-import net.nilsghesquiere.services.RoleService;
-import net.nilsghesquiere.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,7 +26,12 @@ public class IndexController {
 	private static final String VIEW = "index";
 	private static final String REDIRECT_NA_INCREMENT = "redirect:/";
 	private final JeugdhuisService jeugdhuisService ;
-
+	//datums
+	static ZoneId zone = ZoneId.of("Europe/Paris");
+	private static final ZonedDateTime timeNow = ZonedDateTime.now(zone);
+	private static final ZonedDateTime timeStart = ZonedDateTime.parse("2017-03-24T21:00:00+01:00[Europe/Paris]");
+	private static final ZonedDateTime timeEnd = ZonedDateTime.parse("2017-03-25T02:00:00+01:00[Europe/Paris]");
+	
 	@Autowired
 	public IndexController(JeugdhuisService jeugdhuisService) {
 		this.jeugdhuisService = jeugdhuisService;
@@ -53,23 +54,52 @@ public class IndexController {
 	@PreAuthorize("hasAnyAuthority('appadmin','jhadmin')")
 	@RequestMapping(method = RequestMethod.POST)
 	ModelAndView IncreaseDranken(@RequestParam Long jhId, @RequestParam Integer aantDr) {
-		Jeugdhuis jeugdhuis = jeugdhuisService.read(jhId);
-		logger.info("Increasing dranken voor " + jeugdhuis.getName());
-		jeugdhuis.incrementAantalDranken(aantDr);
-		jeugdhuisService.update(jeugdhuis);
-		return new ModelAndView(REDIRECT_NA_INCREMENT);
+		boolean kanToevoegen;
+		String message = "";
+		//tijd controles
+		if (timeNow.isAfter(timeStart)){
+			if (timeNow.isBefore(timeEnd)){
+				kanToevoegen = true;
+			} else {
+				kanToevoegen = false;
+				message = "De clash der jeugdhuizen is nog niet begonnen";
+			}
+		} else {
+			kanToevoegen = false;
+			message = "De clash der jeugdhuizen is reeds afgelopen";
+		}
+		
+		if (kanToevoegen){
+			Jeugdhuis jeugdhuis = jeugdhuisService.read(jhId);
+			logger.info("Increasing dranken voor " + jeugdhuis.getName());
+			jeugdhuis.incrementAantalDranken(aantDr);
+			jeugdhuisService.update(jeugdhuis);
+			return new ModelAndView(REDIRECT_NA_INCREMENT);
+		} else {
+			//Change this to get the user object instead
+			String currentUser = "";
+			if (SecurityContextHolder.getContext().getAuthentication() != null &&
+					 SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+				currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+			} 
+			
+			logger.info("Loading index page.");
+			List<Jeugdhuis> jeugdhuizen = jeugdhuisService.findAllByOrderByIdAsc();
+			return new ModelAndView(VIEW).addObject("jeugdhuizen", jeugdhuizen).addObject("currentUser", currentUser).addObject("failMessage",message);
+		}
 	}
 	
-	  // Login form
-	  @RequestMapping("/login.html")
-	  public String login() {
-	    return "login";
-	  }
+	// Login form
+	@RequestMapping("/login.html")
+	public String login() {
+		return "login";
+	}
 
-	  // Login form with error
-	  @RequestMapping("/login-error.html")
-	  public String loginError(Model model) {
-	    model.addAttribute("loginError", true);
-	    return "login";
-	  }
+	// Login form with error
+	@RequestMapping("/login-error.html")
+	public String loginError(Model model) {
+		model.addAttribute("loginError", true);
+		return "login";
+	}
+	
 }

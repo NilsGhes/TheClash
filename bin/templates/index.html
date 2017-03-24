@@ -57,6 +57,10 @@
 	                 <a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-primary">Logout</a>
                  </div>
             </div>
+            <div class="row" th:if="${failmessage} != null" class="box col-xs-6 col-xs-offset-3 alert alert-danger" th:inline="text">
+            	[[${failmessage}]]
+            	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
             <div class="row">
             	<div id="jeugdhuizen">
             		<div th:each="jh : ${jeugdhuizen}" class="col-xs-6 text-center" th:id="'jeugdhuis' + ${jh.id}" >
