@@ -21,45 +21,6 @@
 			});
 		}
 
-		// Set the date we're counting down to
-		var startDate = new Date("Mar 24, 2017 15:45:00").getTime();
-		var endDate = new Date("Mar 24, 2017 15:47:00").getTime();
-		
-		var x = setInterval(function() {
-			var now = new Date().getTime();
-			var distance = startDate - now;
-			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-			document.getElementById("timer").innerHTML = days + "d " + hours + "h "	+ minutes + "m " + seconds + "s " + "tot start";
-			if (distance < 0) {
-				 if (distance < 0) {
-					clearInterval(x);
-					document.getElementById("timer").innerHTML = "START!!!";
-				}
-			}
-		}, 1000);
-		
-		var nu = new Date().getTime();
-		var tijdTotBegin = startDate - now;
-		if (tijdTotBegin < 0) {
-			var y = setInterval(function() {
-				var now = new Date().getTime();
-				var distance = endDate - now;
-				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-				document.getElementById("timer").innerHTML = hours + "h "	+ minutes + "m " + seconds + "s ";
-				if (distance < 0) {
-					 if (distance < 0) {
-						clearInterval(y);
-						document.getElementById("timer").innerHTML = "Clash der jeugdhuizen afgelopen";
-					}
-				}
-			}, 1000);
-		}
         </script>
         <style type="text/css">
 		@media screen and (max-width: 767px) {
