@@ -57,8 +57,8 @@
 	                 <a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-primary">Logout</a>
                  </div>
             </div>
-            <div class="row" th:if="${failMessage != null}" class="box col-xs-6 col-xs-offset-3 alert alert-danger" th:inline="text">
-            	[[${failmessage}]]
+            <div class="row" th:if="${failMessage != null}" class="box col-xs-6 col-xs-offset-3 alert alert-danger">
+            	<p th:text="#{failMessage}">Niet opgevangen fout!</p>
             	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <div class="row">
