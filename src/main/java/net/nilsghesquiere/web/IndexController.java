@@ -28,7 +28,6 @@ public class IndexController {
 	private final JeugdhuisService jeugdhuisService ;
 	//datums
 	static ZoneId zone = ZoneId.of("Europe/Paris");
-	private static final ZonedDateTime timeNow = ZonedDateTime.now(zone);
 	private static final ZonedDateTime timeStart = ZonedDateTime.parse("2017-03-24T21:00:00+01:00[Europe/Paris]");
 	private static final ZonedDateTime timeEnd = ZonedDateTime.parse("2017-03-25T02:00:00+01:00[Europe/Paris]");
 	
@@ -45,8 +44,7 @@ public class IndexController {
 				 SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
 			currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
 		} 
-
-		logger.info("Loading index page.");
+		
 		List<Jeugdhuis> jeugdhuizen = jeugdhuisService.findAllByOrderByIdAsc();
 		return new ModelAndView(VIEW).addObject("jeugdhuizen", jeugdhuizen).addObject("currentUser", currentUser);
 	}
@@ -56,13 +54,13 @@ public class IndexController {
 	ModelAndView IncreaseDranken(@RequestParam Long jhId, @RequestParam Integer aantDr) {
 		boolean kanToevoegen;
 		String message = "";
-		//tijd controles
+		ZonedDateTime timeNow = ZonedDateTime.now(zone);
+		
 		if (timeNow.isAfter(timeStart)){
 			if (timeNow.isBefore(timeEnd)){
 				kanToevoegen = true;
 			} else {
 				kanToevoegen = false;
-				message = "De clash der jeugdhuizen is nog niet begonnen";
 				message = "De clash der jeugdhuizen is reeds afgelopen";
 			}
 		} else {

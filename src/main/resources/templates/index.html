@@ -5,9 +5,15 @@
         <!--/*/ <th:block th:include="fragments/head :: head"/> /*/-->
         <script type="text/javascript">
         $(function(){
-        	getTime();
+        	//getTime();
         	setInterval(update, 1000);
-        	setInterval(getTime,1000);
+        	//setInterval(getTime,1000);
+        	  $("#timer")
+        	  .countdown("2018/01/01", function(event) {
+        	    $(this).text(
+        	      event.strftime('%D days %H:%M:%S')
+        	    );
+        	  });
         });
         
 		function update(){
