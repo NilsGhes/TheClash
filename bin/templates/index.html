@@ -20,15 +20,15 @@
 	               var currentMinutes = currentdate.getMinutes(); 
 	               var currentSeconds = currentdate.getSeconds();
 	               var timerText = "";
-	               if (currentHours.length == 1){
+	               if (StringcurrentHours.toString().length == 1){
 	            	   timerText += "0";
 	               }
 	               timerText += currentHours + ":"
-	               if (currentMinutes.length == 1){
+	               if (currentMinutes.toString().length == 1){
 	            	   timerText += "0";
 	               }
             	   timerText += currentMinutes + ":";
-	               if (currentSeconds.length == 1){
+	               if (currentSeconds.toString().length == 1){
 	            	   timerText += "0";
 	               }
             	   timerText += currentSeconds;
