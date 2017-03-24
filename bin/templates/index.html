@@ -4,9 +4,8 @@
     <head>
         <!--/*/ <th:block th:include="fragments/head :: head"/> /*/-->
         <script type="text/javascript">
-        
         $(function(){
-        	setInterval(update, 2000);
+        	setInterval(update, 1000);
         });
         
 		function update(){
@@ -15,8 +14,10 @@
 	            $.ajax({
 	                url: "http://clashderjeugdhuizen.herokuapp.com/api/jh/" + id
 	            }).then(function(data) {
-					//console.log("aantalDranken voor jh " + id + ": " + data.aantalDranken);
 	               $('#jhAantalDranken'+ id).text(data.aantalDranken);
+	               var currentdate = new Date(); 
+	               var timerText = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+	               $('#timer').text(timerText);
 	            });
 			});
 		}
