@@ -63,10 +63,11 @@ public class IndexController {
 			} else {
 				kanToevoegen = false;
 				message = "De clash der jeugdhuizen is nog niet begonnen";
+				message = "De clash der jeugdhuizen is reeds afgelopen";
 			}
 		} else {
 			kanToevoegen = false;
-			message = "De clash der jeugdhuizen is reeds afgelopen";
+			message = "De clash der jeugdhuizen is nog niet begonnen";
 		}
 		
 		if (kanToevoegen){
