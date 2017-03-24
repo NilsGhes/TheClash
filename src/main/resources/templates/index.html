@@ -19,16 +19,19 @@
 	               var currentHours = currentdate.getHours();
 	               var currentMinutes = currentdate.getMinutes(); 
 	               var currentSeconds = currentdate.getSeconds();
-	               if (currentSeconds.length == 1){
-	            		currentSeconds = "0" + currentSeconds;
-	               }
-	               if (currentMinutes.length == 1){
-	            	   currentMinutes = "0" + currentMinutes;
-	               }
+	               var timerText = "";
 	               if (currentHours.length == 1){
-	            	   currentHours = "0" + currentHours;
+	            	   timerText += "0";
 	               }
-	               var timerText = currentHours + ":" + currentMinutes + ":" + currentSeconds;
+	               timerText += currentHours + ":"
+	               if (currentMinutes.length == 1){
+	            	   timerText += "0";
+	               }
+            	   timerText += currentMinutes + ":";
+	               if (currentSeconds.length == 1){
+	            	   timerText += "0";
+	               }
+            	   timerText += currentSeconds;
 	               $('#timer').text(timerText);
 	            });
 			});
