@@ -25,9 +25,9 @@
         </script>
         <style type="text/css">
 		@media screen and (max-width: 767px) {
-			body{ font-size: 1em; }
+			body{ font-size: 1.2em; }
 			h1 { font-size: 1.8em; }
-			h2 { font-size: 1.3em; }
+			h2 { font-size: 1.4em; }
 		}
 		
 		@media screen and (min-width: 768px) {
@@ -58,8 +58,8 @@
                  </div>
             </div>
             <div class="row" th:if="${failMessage != null}">
-           		 <div class="col-xs-12 text-center alert alert-danger">
-            		<p th:text="${failMessage}">Niet opgevangen fout!</p>
+           		 <div class="col-xs-12 text-center alert alert-danger" th:inline="text">
+            		[[${failMessage}]]
             		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
            		</div>
             </div>
