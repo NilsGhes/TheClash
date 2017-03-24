@@ -16,7 +16,19 @@
 	            }).then(function(data) {
 	               $('#jhAantalDranken'+ id).text(data.aantalDranken);
 	               var currentdate = new Date(); 
-	               var timerText = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+	               var currentHours = currentdate.getHours();
+	               var currentMinutes = currentdate.getMinutes(); 
+	               var currentSeconds = currentdate.getSeconds();
+	               if (currentSeconds.length == 1){
+	            		currentSeconds = "0" + currentSeconds;
+	               }
+	               if (currentMinutes.length == 1){
+	            	   currentMinutes = "0" + currentMinutes;
+	               }
+	               if (currentHours.length == 1){
+	            	   currentHours = "0" + currentHours;
+	               }
+	               var timerText = currentHours + ":" + currentMinutes + ":" + currentSeconds;
 	               $('#timer').text(timerText);
 	            });
 			});
