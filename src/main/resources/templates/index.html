@@ -20,7 +20,7 @@
 			$('[id^="jhAantalDranken"]').each(function() {
 				var id= $(this).attr('idjh')
 	            $.ajax({
-	                url: "http://clashderjeugdhuizen.herokuapp.com/api/jh/" + id
+	                url: "https://clashderjeugdhuizen.herokuapp.com/api/jh/" + id
 	            }).then(function(data) {
 	               $('#jhAantalDranken'+ id).text(data.aantalDranken);
 	            });
