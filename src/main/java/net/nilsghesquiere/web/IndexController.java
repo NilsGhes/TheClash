@@ -28,8 +28,8 @@ public class IndexController {
 	private final JeugdhuisService jeugdhuisService ;
 	//datums
 	static ZoneId zone = ZoneId.of("Europe/Paris");
-	private static final ZonedDateTime timeStart = ZonedDateTime.parse("2017-03-24T21:00:00+01:00[Europe/Paris]");
-	private static final ZonedDateTime timeEnd = ZonedDateTime.parse("2017-03-25T02:00:00+01:00[Europe/Paris]");
+	private static final ZonedDateTime timeStart = ZonedDateTime.parse("2017-03-25T21:00:00+01:00[Europe/Paris]");
+	private static final ZonedDateTime timeEnd = ZonedDateTime.parse("2017-03-26T02:00:00+01:00[Europe/Paris]");
 	
 	@Autowired
 	public IndexController(JeugdhuisService jeugdhuisService) {
